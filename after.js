@@ -14,7 +14,7 @@
           e.target.querySelector(".widget").insertAdjacentHTML("beforeend", htmlElement);
 
           const form = e.target.querySelector(".widget").querySelector(".gemairo");
-          console.log(form);
+
           form.addEventListener("submit", (e) => {
             e.preventDefault();
             const data = new FormData(e.target);
