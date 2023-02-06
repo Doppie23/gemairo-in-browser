@@ -1,4 +1,3 @@
-// this code will be executed after page load
 (function () {
   MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
@@ -8,9 +7,9 @@
         const inputbox = e.target.querySelector(".widget").querySelector(".gemairo");
         if (inputbox === null) {
           const htmlElement = `<form class='gemairo'>
-                                <input name="onvoldoende_grens" class='gemairo_input' placeholder='Wat wil ik staan?'/>
-                                <input name="weging" class='gemairo_weging' placeholder='Weging'/>
-                                <input type="submit" hidden />
+                                <input maxlength="4" type="number" autocomplete="off" name="onvoldoende_grens" class='gemairo_input' placeholder='Wat wil ik staan?'/>
+                                <input maxlength="4" type="number" autocomplete="off" name="weging" class='gemairo_weging' placeholder='Weging'/>
+                                <input type="submit" value="Bereken" formnovalidate />
                               </form>`;
           e.target.querySelector(".widget").insertAdjacentHTML("beforeend", htmlElement);
 
@@ -20,8 +19,18 @@
             e.preventDefault();
             const data = new FormData(e.target);
             const inputdata = [...data.entries()];
-            let nodigcijfer = BerekenCijferNodig(inputdata[0][1], inputdata[1][1]);
-            console.log(nodigcijfer);
+            const WatWilIkStaan = inputdata[0][1];
+            const weging = inputdata[1][1];
+
+            let nodigcijfer = BerekenCijferNodig(WatWilIkStaan, weging);
+
+            let htmlCijferNodigElement = document.querySelector(".textcijfernodig");
+            if (htmlCijferNodigElement === null) {
+              htmlCijferNodigElement = `<div class=textcijfernodig>Je moet een ${nodigcijfer} halen.</div>`;
+              form.insertAdjacentHTML("afterend", htmlCijferNodigElement);
+            } else {
+              htmlCijferNodigElement.textContent = `Je moet een ${nodigcijfer} halen.`;
+            }
           });
         }
       }
@@ -36,15 +45,22 @@
 
 function BerekenCijferNodig(onvoldoende_grens, weging) {
   let [cijfers, weights] = getCijfer();
-  let totaalcijfers_incweging = 0;
 
+  let totaalcijfers_incweging = 0;
   for (let i = 0; i < cijfers.length; i++) {
     const cijfer = cijfers[i];
     const weging = weights[i];
     totaalcijfers_incweging += cijfer * weging;
   }
 
-  let wat_moet_ik_halen = (onvoldoende_grens * weging) / cijfers.length++ - totaalcijfers_incweging;
+  let total_weging = 0;
+  weights.forEach((e) => {
+    total_weging += parseInt(e);
+  });
+  total_weging += parseInt(weging);
+
+  let wat_moet_ik_halen =
+    (parseFloat(onvoldoende_grens) * total_weging - totaalcijfers_incweging) / parseInt(weging);
   return wat_moet_ik_halen;
 }
 
@@ -52,13 +68,12 @@ function getCijfer() {
   let cijfers = [];
   let weights = [];
   const table = document.querySelector(".cijfer-berekend").querySelectorAll("tbody td");
-  console.log(table);
   table.forEach((element) => {
     if (element.getAttribute("data-ng-if") === "vm.showCijfer") {
-      cijfers.push(element.textContent);
+      cijfers.push(parseFloat(element.textContent.replace(",", ".")));
     }
     if (element.getAttribute("data-ng-if") === "vm.showWeegfactor") {
-      weights.push(element.textContent);
+      weights.push(parseFloat(element.textContent));
     }
   });
 

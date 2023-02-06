@@ -6,13 +6,7 @@
   margin-top: 1rem;
 }
 
-.gemairo_input {
-  padding: 0.5rem;
-  border-radius: 10px;
-}
-
-.gemairo_weging {
-  padding: 0.5rem;
-  width: 4rem;
-  border-radius: 10px;
+.textcijfernodig {
+  margin: 1rem;
+  text-align: center;
 }
