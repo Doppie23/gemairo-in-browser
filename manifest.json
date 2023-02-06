@@ -5,17 +5,11 @@
   "manifest_version": 3,
   "content_scripts": [
     {
-      "run_at": "document_idle",
       "js": ["after.js"],
-      "matches": [
-        "https://*.magister.net/magister/#/cijfers/cijferoverzicht",
-        "http://*.magister.net/magister/#/cijfers/cijferoverzicht"
-      ]
+      "css": ["style.css"],
+      "matches": ["http://*.magister.net/*", "https://*.magister.net/*"]
     }
   ],
-  "background": {
-    "service_worker": "background.js"
-  },
   "permissions": ["tabs", "scripting"],
   "host_permissions": ["https://*/*", "http://*/*"]
 }
