@@ -6,16 +6,16 @@
       if (e.target.id === "idBerekening" && e.target.className === "tabsheet active") {
         const inputbox = e.target.querySelector(".widget").querySelector(".gemairo");
         if (inputbox === null) {
-          const htmlElement = `<form class='gemairo'>
+          const cijferNodigHTMLObject = `<form class='gemairo'>
                                 <input maxlength="4" type="number" autocomplete="off" name="onvoldoende_grens" class='gemairo_input' placeholder='Wat wil ik staan?'/>
                                 <input maxlength="4" type="number" autocomplete="off" name="weging" class='gemairo_weging' placeholder='Weging'/>
                                 <input type="submit" value="Bereken" formnovalidate />
                               </form>`;
-          e.target.querySelector(".widget").insertAdjacentHTML("beforeend", htmlElement);
+          e.target.querySelector(".widget").insertAdjacentHTML("beforeend", cijferNodigHTMLObject);
 
-          const form = e.target.querySelector(".widget").querySelector(".gemairo");
+          const formCijferNodig = e.target.querySelector(".widget").querySelector(".gemairo");
 
-          form.addEventListener("submit", (e) => {
+          formCijferNodig.addEventListener("submit", (e) => {
             e.preventDefault();
             const data = new FormData(e.target);
             const inputdata = [...data.entries()];
@@ -27,7 +27,7 @@
             let htmlCijferNodigElement = document.querySelector(".textcijfernodig");
             if (htmlCijferNodigElement === null) {
               htmlCijferNodigElement = `<div class=textcijfernodig>Je moet een ${nodigcijfer} halen.</div>`;
-              form.insertAdjacentHTML("afterend", htmlCijferNodigElement);
+              formCijferNodig.insertAdjacentHTML("afterend", htmlCijferNodigElement);
             } else {
               htmlCijferNodigElement.textContent = `Je moet een ${nodigcijfer} halen.`;
             }
