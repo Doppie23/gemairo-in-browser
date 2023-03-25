@@ -1,11 +1,11 @@
 {
   "name": "Gemairo in Browser",
-  "description": "EPic",
-  "version": "0.0.1",
+  "description": "Gemairo voor de desktop Magister site",
+  "version": "1.0",
   "manifest_version": 3,
   "content_scripts": [
     {
-      "js": ["after.js"],
+      "js": ["script.js"],
       "css": ["style.css"],
       "matches": ["http://*.magister.net/*", "https://*.magister.net/*"]
     }

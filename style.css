@@ -1,4 +1,4 @@
-.gemairo {
+.formstyle {
   padding: 0;
   width: 100%;
   display: flex;
@@ -7,6 +7,11 @@
 }
 
 .textcijfernodig {
+  margin: 1rem;
+  text-align: center;
+}
+
+.textcijferWatGaIkStaan {
   margin: 1rem;
   text-align: center;
 }
