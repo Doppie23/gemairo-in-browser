@@ -16,7 +16,7 @@
             .insertAdjacentHTML("beforeend", htmlElement_cijfernodig);
 
           const htmlElement_WatGaIkStaan = `<form class='gemairo-wat-ga-ik-staan formstyle'>
-                                <input maxlength="4" type="number" autocomplete="off" name="onvoldoende_grens" class='gemairo_input' placeholder='Wat ga ik staan?'/>
+                                <input maxlength="4" type="number" autocomplete="off" name="onvoldoende_grens" class='gemairo_input' placeholder='Nieuw cijfer'/>
                                 <input maxlength="4" type="number" autocomplete="off" name="weging" class='gemairo_weging' placeholder='Weging'/>
                                 <input type="submit" value="Bereken" formnovalidate />
                               </form>`;
